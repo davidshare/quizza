@@ -6,6 +6,11 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
+flask = "*"
+flask-restful = "*"
+flask-jwt = "*"
+python-dotenv = "*"
+flask-pymongo = "*"
 
 [requires]
 python_version = "3.7"
