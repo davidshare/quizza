@@ -1,5 +1,5 @@
 import os
-from utils.utils import get_env_vars
+from app.utils.utils import get_env_vars
 
 class Config:
   '''
