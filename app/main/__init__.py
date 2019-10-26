@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from app.utils.utils import get_env_vars
 
 from .config import config
 
