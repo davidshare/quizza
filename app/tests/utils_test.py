@@ -1,6 +1,6 @@
 from os import environ, getenv
 import unittest
-from app.utils.utils import get_env_vars
+from config.utils import get_env_vars
 
 environ['TEST_VALUE'] = 'test_value'
 

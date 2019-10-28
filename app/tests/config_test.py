@@ -1,8 +1,9 @@
 import unittest
 from flask import current_app
-from app.app import app
-from app.main import create_app
-from app.utils.utils import get_env_vars
+from app import create_app
+from config.utils import get_env_vars
+
+app = create_app('development')
 
 class ConfigTest(unittest.TestCase):
 
@@ -10,7 +11,8 @@ class ConfigTest(unittest.TestCase):
     self.assertFalse(app.config['SECRET_KEY'] is 'DAVID')
     self.assertTrue(app.config['DEBUG'] is True)
     self.assertFalse(current_app is None)
-    self.assertEqual(app.config['DB_URL'], get_env_vars('DEV_DB_URL'))
+    self.assertEqual(app.config['DB_URL'], get_env_vars('DB_URL'))
+    self.assertEqual(app.config['PROD_DB'], get_env_vars('DEV_DB'))
 
 class TestProductionConfig(unittest.TestCase):
 
@@ -19,7 +21,9 @@ class TestProductionConfig(unittest.TestCase):
     self.assertFalse(app.config['SECRET_KEY'] is 'DAVID')
     self.assertTrue(app.config['DEBUG'] is False)
     self.assertFalse(current_app is None)
-    self.assertEqual(app.config['DB_URL'], get_env_vars('PROD_DB_URL'))
+    self.assertEqual(app.config['DB_URL'], get_env_vars('DB_URL'))
+    self.assertEqual(app.config['PROD_DB'], get_env_vars('PROD_DB'))
+
 
 class TestTestingConfig(unittest.TestCase):
 
@@ -28,7 +32,8 @@ class TestTestingConfig(unittest.TestCase):
     self.assertFalse(app.config['SECRET_KEY'] is 'DAVID')
     self.assertTrue(app.config['DEBUG'] is False)
     self.assertFalse(current_app is None)
-    self.assertEqual(app.config['DB_URL'], get_env_vars('TEST_DB_URL'))
+    self.assertEqual(app.config['DB_URL'], get_env_vars('DB_URL'))
+    self.assertEqual(app.config['PROD_DB'], get_env_vars('TEST_DB'))
 
 if __name__ == '__main__':
   unittest.main()
