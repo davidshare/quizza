@@ -6,6 +6,7 @@ from config.utils import get_env_vars
 
 from config.environment_config import config
 from app.cli_commands import run_coverage, run_tests
+from config.db_config import AppDatabase
 
 def create_app(config_override=None):
   '''
@@ -28,6 +29,8 @@ def create_app(config_override=None):
 
 
 app = create_app(get_env_vars('FLASK_ENV'))
+connection = AppDatabase(app)
+db = connection.db_connect()
 
 FlaskCLI(app)
 
@@ -38,3 +41,7 @@ def tests():
 @app.cli.command("coverage")
 def coverage():
   return run_coverage()
+
+@app.route('/')
+def home():
+  return {"welcome": "welcome home" }
