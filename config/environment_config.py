@@ -7,12 +7,14 @@ class Config:
   '''
   SECRET_KEY = get_env_vars('SECRET_KEY')
   DEBUG = False
+  DB_URL = get_env_vars('DB_URL')
 
 class ProductionConfig(Config):
   '''
     class with configuration for the production environment
   '''
   DB_URL = get_env_vars('PROD_DB_URL')
+  DB_NAME = get_env_vars('PROD_DB')
 
 class DevelopmentConfig(Config):
   '''
@@ -20,12 +22,15 @@ class DevelopmentConfig(Config):
   '''
   DEBUG=True
   DB_URL = get_env_vars('DEV_DB_URL')
+  DB_NAME = get_env_vars('DEV_DB')
 
 class TestConfig(Config):
   '''
     class with configuration for the test environment
   '''
   DB_URL = get_env_vars('TEST_DB_URL')
+  DB_NAME = get_env_vars('TEST_DB')
+
 
 config = {
     'development': DevelopmentConfig,
