@@ -3,11 +3,12 @@ from flask import current_app
 from app import create_app
 from config.utils import get_env_vars
 
-app = create_app('development')
+
 
 class ConfigTest(unittest.TestCase):
 
   def test_development_environment(self):
+    app = create_app('development')
     self.assertFalse(app.config['SECRET_KEY'] is 'DAVID')
     self.assertTrue(app.config['DEBUG'] is True)
     self.assertFalse(current_app is None)

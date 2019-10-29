@@ -7,6 +7,7 @@ from config.utils import get_env_vars
 from config.environment_config import config
 from app.cli_commands import run_coverage, run_tests
 from config.db_config import AppDatabase
+from app.blueprints import AppBlueprints
 
 def create_app(config_override=None):
   '''
@@ -42,6 +43,5 @@ def tests():
 def coverage():
   return run_coverage()
 
-@app.route('/')
-def home():
-  return {"welcome": "welcome home" }
+app_blueprints = AppBlueprints(app)
+app_blueprints.register_app_blueprints()
