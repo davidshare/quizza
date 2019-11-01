@@ -1,6 +1,6 @@
 import unittest
 from flask import current_app
-from app import create_app
+from app.main_app import create_app
 from config.utils import get_env_vars
 
 
@@ -13,7 +13,7 @@ class ConfigTest(unittest.TestCase):
     self.assertTrue(app.config['DEBUG'] is True)
     self.assertFalse(current_app is None)
     self.assertEqual(app.config['DB_URL'], get_env_vars('DB_URL'))
-    self.assertEqual(app.config['PROD_DB'], get_env_vars('DEV_DB'))
+    self.assertEqual(app.config['DB_NAME'], get_env_vars('DEV_DB'))
 
 class TestProductionConfig(unittest.TestCase):
 
@@ -23,7 +23,7 @@ class TestProductionConfig(unittest.TestCase):
     self.assertTrue(app.config['DEBUG'] is False)
     self.assertFalse(current_app is None)
     self.assertEqual(app.config['DB_URL'], get_env_vars('DB_URL'))
-    self.assertEqual(app.config['PROD_DB'], get_env_vars('PROD_DB'))
+    self.assertEqual(app.config['DB_NAME'], get_env_vars('PROD_DB'))
 
 
 class TestTestingConfig(unittest.TestCase):
@@ -34,7 +34,7 @@ class TestTestingConfig(unittest.TestCase):
     self.assertTrue(app.config['DEBUG'] is False)
     self.assertFalse(current_app is None)
     self.assertEqual(app.config['DB_URL'], get_env_vars('DB_URL'))
-    self.assertEqual(app.config['PROD_DB'], get_env_vars('TEST_DB'))
+    self.assertEqual(app.config['DB_NAME'], get_env_vars('TEST_DB'))
 
 if __name__ == '__main__':
   unittest.main()
